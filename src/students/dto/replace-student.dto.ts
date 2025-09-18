@@ -1,0 +1,17 @@
+import { IsEmail, IsNotEmpty, IsString, IsBoolean } from 'class-validator';
+
+export class ReplaceStudentDto {
+  @IsNotEmpty({ message: 'O nome é obrigatório' })
+  @IsString()
+  name: string;
+
+  @IsNotEmpty({ message: 'O email é obrigatório' })
+  @IsEmail()
+  email: string;
+
+  @IsString({ message: 'A matrícula deve ser uma string' })
+  registration?: string;
+
+  @IsBoolean({ message: 'O campo ativo deve ser um booleano' })
+  active?: boolean;
+}
