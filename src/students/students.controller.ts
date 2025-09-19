@@ -7,11 +7,11 @@ import {
   Delete,
   Param,
   Body,
-} from '@nestjs/common';
-import { StudentsService } from './students.service';
-import { Student } from './students.model';
+} from "@nestjs/common";
+import { StudentsService } from "./students.service";
+import { Student } from "./students.model";
 
-@Controller('students')
+@Controller("students")
 export class StudentsController {
   constructor(private readonly studentsService: StudentsService) {}
 
@@ -20,8 +20,8 @@ export class StudentsController {
     return this.studentsService.getAll();
   }
 
-  @Get(':id')
-  getById(@Param('id') id: string): any {
+  @Get(":id")
+  getById(@Param("id") id: string): any {
     return this.studentsService.getById(id);
   }
 
@@ -30,18 +30,18 @@ export class StudentsController {
     return this.studentsService.create(student);
   }
 
-  @Put(':id')
-  replace(@Param('id') id: string, @Body() newData: Student) {
+  @Put(":id")
+  replace(@Param("id") id: string, @Body() newData: Student) {
     return this.studentsService.replace(id, newData);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() newData: Partial<Student>) {
+  @Patch(":id")
+  update(@Param("id") id: string, @Body() newData: Partial<Student>) {
     return this.studentsService.update(id, newData);
   }
 
-  @Delete(':id')
-  delete(@Param('id') id: string) {
+  @Delete(":id")
+  delete(@Param("id") id: string) {
     return this.studentsService.delete(id);
   }
 }
