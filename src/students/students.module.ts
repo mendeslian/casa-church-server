@@ -3,10 +3,10 @@ import { SequelizeModule } from "@nestjs/sequelize";
 import { StudentsController } from "./students.controller";
 import { StudentsService } from "./students.service";
 import { StudentsRepository } from "./students.repository";
-import { Student } from "./students.model";
+import { models } from "src/models";
 
 @Module({
-  imports: [SequelizeModule.forFeature([Student])],
+  imports: [SequelizeModule.forFeature(models)],
   controllers: [StudentsController],
   providers: [StudentsService, StudentsRepository],
 })
