@@ -11,12 +11,12 @@ export class StudentsRepository {
     private readonly studentModel: typeof Student
   ) {}
 
-  async findAll(): Promise<Student[] | null> {
+  async findAll() {
     const students = await this.studentModel.findAll();
     return students;
   }
 
-  async findById(id: string): Promise<Student | null> {
+  async findById(id: string) {
     const student = await this.studentModel.findByPk(id, {
       include: [
         {
@@ -28,7 +28,7 @@ export class StudentsRepository {
     return student;
   }
 
-  async findByEmail(email: string): Promise<Student | null> {
+  async findByEmail(email: string) {
     const student = await this.studentModel.findOne({
       where: {
         email: email,
@@ -38,25 +38,25 @@ export class StudentsRepository {
     return student!;
   }
 
-  async create(student): Promise<Student> {
+  async create(student) {
     const newStudent = await this.studentModel.create(student);
 
     return newStudent;
   }
 
-  async replace(id: string, newData): Promise<Student> {
+  async replace(id: string, newData) {
     const student = await this.studentModel.findByPk(id);
 
     return await student!.update(newData);
   }
 
-  async update(id: string, newData): Promise<Student> {
+  async update(id: string, newData) {
     const student = await this.studentModel.findByPk(id);
 
     return await student!.update(newData);
   }
 
-  async delete(id: string): Promise<null> {
+  async delete(id: string) {
     const student = await this.studentModel.findByPk(id);
 
     student!.destroy();
