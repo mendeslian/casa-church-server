@@ -1,6 +1,8 @@
 import { Injectable } from "@nestjs/common";
 import { InjectModel } from "@nestjs/sequelize";
+import { Attributes } from "sequelize";
 import { Courses, Student } from "../models/index";
+import { CreateStudentDto } from "./dto/create-student.dto";
 
 @Injectable()
 export class StudentsRepository {
@@ -36,19 +38,19 @@ export class StudentsRepository {
     return student!;
   }
 
-  async create(student: Student): Promise<Student> {
+  async create(student): Promise<Student> {
     const newStudent = await this.studentModel.create(student);
 
     return newStudent;
   }
 
-  async replace(id: string, newData: Student): Promise<Student> {
+  async replace(id: string, newData): Promise<Student> {
     const student = await this.studentModel.findByPk(id);
 
     return await student!.update(newData);
   }
 
-  async update(id: string, newData: Partial<Student>): Promise<Student> {
+  async update(id: string, newData): Promise<Student> {
     const student = await this.studentModel.findByPk(id);
 
     return await student!.update(newData);

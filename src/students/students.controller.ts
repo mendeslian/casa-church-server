@@ -9,7 +9,9 @@ import {
   Body,
 } from "@nestjs/common";
 import { StudentsService } from "./students.service";
-import { Student } from "./entities/students.model";
+import { CreateStudentDto } from "./dto/create-student.dto";
+import { ReplaceStudentDto } from "./dto/replace-student.dto";
+import { UpdateStudentDto } from "./dto/update-student.dto";
 
 @Controller("students")
 export class StudentsController {
@@ -26,18 +28,21 @@ export class StudentsController {
   }
 
   @Post()
-  create(@Body() student: Student) {
-    return this.studentsService.create(student);
+  create(@Body() createStudentDto: CreateStudentDto) {
+    return this.studentsService.create(createStudentDto);
   }
 
   @Put(":id")
-  replace(@Param("id") id: string, @Body() newData: Student) {
-    return this.studentsService.replace(id, newData);
+  replace(
+    @Param("id") id: string,
+    @Body() replaceStudentDto: ReplaceStudentDto
+  ) {
+    return this.studentsService.replace(id, replaceStudentDto);
   }
 
   @Patch(":id")
-  update(@Param("id") id: string, @Body() newData: Partial<Student>) {
-    return this.studentsService.update(id, newData);
+  update(@Param("id") id: string, @Body() updateStudentDto: UpdateStudentDto) {
+    return this.studentsService.update(id, updateStudentDto);
   }
 
   @Delete(":id")
