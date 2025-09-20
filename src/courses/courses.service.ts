@@ -6,20 +6,18 @@ import { Courses } from "./entities/courses.model";
 export class CoursesService {
   constructor(private readonly courseRepository: CoursesRepository) {}
 
-  async getAll(): Promise<Courses[] | null> {
+  async getAll() {
     return await this.courseRepository.findAll();
   }
 
-  async getById(id: string): Promise<Courses | null> {
+  async getById(id: string) {
     const student = await this.courseRepository.getById(id);
 
     if (!student) throw new NotFoundException("Curso não encontrado");
     return student;
   }
 
-  async create(
-    course: Courses
-  ): Promise<{ message: string; newCourse: Courses }> {
+  async create(course: Courses) {
     const newCourse = await this.courseRepository.create(course);
     return {
       message: "Curso criado com sucesso",
@@ -27,10 +25,7 @@ export class CoursesService {
     };
   }
 
-  async replace(
-    id: string,
-    newData: Courses
-  ): Promise<{ message: string; updatedCourse: Courses }> {
+  async replace(id: string, newData: Courses) {
     const course = await this.courseRepository.getById(id);
 
     if (!course) throw new NotFoundException("Curso não encontrado");
@@ -42,10 +37,7 @@ export class CoursesService {
     };
   }
 
-  async update(
-    id: string,
-    newData: Partial<Courses>
-  ): Promise<{ message: string; updatedCourse: Courses }> {
+  async update(id: string, newData: Partial<Courses>) {
     const course = await this.courseRepository.getById(id);
 
     if (!course) throw new NotFoundException("Curso não encontrado");
@@ -57,7 +49,7 @@ export class CoursesService {
     };
   }
 
-  async delete(id: string): Promise<{ message: string }> {
+  async delete(id: string) {
     const course = await this.courseRepository.getById(id);
     if (!course) throw new NotFoundException("Curso não encontrado");
 

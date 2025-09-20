@@ -7,35 +7,35 @@ export class CoursesRepository {
     private readonly coursesModel: typeof Courses
   ) {}
 
-  async findAll(): Promise<Courses[] | null> {
+  async findAll() {
     const courses = await this.coursesModel.findAll();
     return courses;
   }
 
-  async getById(id: string): Promise<Courses | null> {
+  async getById(id: string) {
     const course = await this.coursesModel.findByPk(id);
     return course;
   }
 
-  async create(course: Courses): Promise<Courses> {
+  async create(course: Courses) {
     const newCourse = await this.coursesModel.create(course);
 
     return newCourse;
   }
 
-  async replace(id: string, newData: Courses): Promise<Courses> {
+  async replace(id: string, newData: Courses) {
     const course = await this.getById(id);
 
     return await course!.update(newData);
   }
 
-  async update(id: string, newData: Partial<Courses>): Promise<Courses> {
+  async update(id: string, newData: Partial<Courses>) {
     const course = await this.getById(id);
 
     return await course!.update(newData);
   }
 
-  async delete(id: string): Promise<null> {
+  async delete(id: string) {
     const course = await this.getById(id);
 
     await course!.destroy();

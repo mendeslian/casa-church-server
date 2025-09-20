@@ -16,17 +16,17 @@ export class CoursesController {
   constructor(private readonly courseService: CoursesService) {}
 
   @Get()
-  getAll(): any {
+  getAll() {
     return this.courseService.getAll();
   }
 
   @Get(":id")
-  getById(@Param("id") id: string): any {
+  getById(@Param("id") id: string) {
     return this.courseService.getById(id);
   }
 
   @Post()
-  create(@Body() course: Courses): any {
+  create(@Body() course: Courses) {
     return this.courseService.create(course);
   }
 
