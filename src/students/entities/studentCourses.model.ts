@@ -11,6 +11,7 @@ import { Student, Courses } from "src/models";
   tableName: "studentCourses",
   timestamps: true,
   createdAt: "created_at",
+  updatedAt: false,
 })
 export class StudentCourses extends Model<StudentCourses> {
   @Column({
