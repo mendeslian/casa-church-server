@@ -16,7 +16,12 @@ export class StudentsRepository {
 
   async findById(id: string): Promise<Student | null> {
     const student = await this.studentModel.findByPk(id, {
-      include: [Courses],
+      include: [
+        {
+          model: Courses,
+          through: { attributes: [] },
+        },
+      ],
     });
     return student;
   }
