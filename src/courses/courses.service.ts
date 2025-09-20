@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
 import { CoursesRepository } from "./courses.repository";
 import { Courses } from "./entities/courses.model";
+import { CreateCourseDto } from "./dto/create-course.dto";
 
 @Injectable()
 export class CoursesService {
@@ -17,8 +18,8 @@ export class CoursesService {
     return student;
   }
 
-  async create(course: Courses) {
-    const newCourse = await this.courseRepository.create(course);
+  async create(createCourseDto: CreateCourseDto) {
+    const newCourse = await this.courseRepository.create(createCourseDto);
     return {
       message: "Curso criado com sucesso",
       newCourse,

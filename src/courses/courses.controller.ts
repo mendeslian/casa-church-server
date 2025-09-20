@@ -10,6 +10,7 @@ import {
 } from "@nestjs/common";
 import { CoursesService } from "./courses.service";
 import { Courses } from "./entities/courses.model";
+import { CreateCourseDto } from "./dto/create-course.dto";
 
 @Controller("courses")
 export class CoursesController {
@@ -26,8 +27,8 @@ export class CoursesController {
   }
 
   @Post()
-  create(@Body() course: Courses) {
-    return this.courseService.create(course);
+  create(@Body() createCourseDto: CreateCourseDto) {
+    return this.courseService.create(createCourseDto);
   }
 
   @Put(":id")

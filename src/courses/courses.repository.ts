@@ -17,7 +17,7 @@ export class CoursesRepository {
     return course;
   }
 
-  async create(course: Courses) {
+  async create(course) {
     const newCourse = await this.coursesModel.create(course);
 
     return newCourse;
