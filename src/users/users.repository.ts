@@ -1,7 +1,7 @@
 import { InjectModel } from "@nestjs/sequelize";
 import { User } from "src/models";
-// import { CreateUserDto } from "./dto/create-user.dto";
-// import { UpdateUserDto } from "./dto/update-user.dto";
+import { CreateUser } from "./types/user.types";
+import { UpdateUser } from "./types/user.types";
 
 export class UsersRepository {
   constructor(
@@ -9,7 +9,7 @@ export class UsersRepository {
     private readonly userModel: typeof User
   ) {}
 
-  async create(data) {
+  async create(data: CreateUser) {
     const createdUser = await this.userModel.create(data);
 
     return createdUser;
@@ -35,7 +35,7 @@ export class UsersRepository {
     return user;
   }
 
-  async update(id: string, data) {
+  async update(id: string, data: UpdateUser) {
     const user = await this.findById(id);
 
     return await user!.update(data);
