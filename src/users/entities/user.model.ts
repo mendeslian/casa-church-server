@@ -10,7 +10,7 @@ import {
 } from "sequelize-typescript";
 import { UserRoles } from "../types/user.types";
 
-@Table({ tableName: "users", timestamps: true })
+@Table({ tableName: "users", schema: "casa-church", timestamps: true })
 export class User extends Model {
   @PrimaryKey
   @Default(DataType.UUIDV4)
