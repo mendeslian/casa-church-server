@@ -31,7 +31,7 @@ export class CreateUserDto {
   @IsEnum(UserRoles, { message: "O campo cargo deve ser 'user' ou 'admin'." })
   role: UserRoles;
 
-  @IsOptional()
-  @IsBoolean({ message: "O campo ativo deve ser um booleano." })
-  active?: boolean;
+  // @IsOptional()
+  // @IsBoolean({ message: "O campo ativo deve ser um booleano." })
+  // active?: boolean;
 }
