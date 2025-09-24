@@ -6,14 +6,11 @@ import {
   Patch,
   Param,
   Delete,
-  Req,
   UseGuards,
 } from "@nestjs/common";
 import { UsersService } from "./users.service";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
-import express from "express";
-import { REQUEST_TOKEN_PAYLOAD } from "src/auth/auth.constants";
 import { AuthTokenGuard } from "src/auth/guard/auth-token.guard";
 
 @UseGuards(AuthTokenGuard)
