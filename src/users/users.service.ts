@@ -1,9 +1,11 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, UnauthorizedException } from "@nestjs/common";
 import { NotFoundException, ConflictException } from "@nestjs/common";
 import { UsersRepository } from "./users.repository";
 import { CreateUserDto } from "./dto/create-user.dto";
 import { UpdateUserDto } from "./dto/update-user.dto";
 import { HashService } from "src/auth/hash/hash.service";
+import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
+import { USER_ADMIN_ROLE } from "./user.constants";
 
 @Injectable()
 export class UsersService {
@@ -12,7 +14,13 @@ export class UsersService {
     private readonly hashService: HashService
   ) {}
 
-  async create(createUserDto: CreateUserDto) {
+  async create(createUserDto: CreateUserDto, tokenPayload: TokenPayloadDto) {
+    if (tokenPayload.role !== USER_ADMIN_ROLE) {
+      throw new UnauthorizedException(
+        "Você não tem permissão para acessar este recurso."
+      );
+    }
+
     const userExists = await this.usersRepository.findByEmail(
       createUserDto.email
     );
@@ -42,7 +50,17 @@ export class UsersService {
     return user;
   }
 
-  async update(id: string, updateUserDto: UpdateUserDto) {
+  async update(
+    id: string,
+    updateUserDto: UpdateUserDto,
+    tokenPayload: TokenPayloadDto
+  ) {
+    if (tokenPayload.role !== USER_ADMIN_ROLE && id !== tokenPayload.id) {
+      throw new UnauthorizedException(
+        "Você não tem permissão para acessar este recurso."
+      );
+    }
+
     const userExists = await this.usersRepository.findById(id);
     if (!userExists) throw new NotFoundException("Usuário não encontrado");
 
@@ -58,7 +76,13 @@ export class UsersService {
     };
   }
 
-  async remove(id: string) {
+  async remove(id: string, tokenPayload: TokenPayloadDto) {
+    if (tokenPayload.role !== USER_ADMIN_ROLE && id !== tokenPayload.id) {
+      throw new UnauthorizedException(
+        "Você não tem permissão para acessar este recurso."
+      );
+    }
+
     const userExists = await this.usersRepository.findById(id);
     if (!userExists) throw new NotFoundException("Usuário não encontrado");
 
