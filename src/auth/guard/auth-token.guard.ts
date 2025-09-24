@@ -6,6 +6,7 @@ import {
 } from "@nestjs/common";
 import { Request } from "express";
 import { JwtService } from "@nestjs/jwt";
+import { REQUEST_TOKEN_PAYLOAD } from "../auth.constants";
 
 @Injectable()
 export class AuthTokenGuard implements CanActivate {
@@ -23,7 +24,7 @@ export class AuthTokenGuard implements CanActivate {
         issuer: process.env.JWT_TOKEN_ISSUER,
       });
 
-      (req as any).user = payload;
+      req[REQUEST_TOKEN_PAYLOAD] = payload;
     } catch (error) {
       throw new UnauthorizedException("Token inválido ou expirado");
     }
