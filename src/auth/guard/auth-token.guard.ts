@@ -7,10 +7,14 @@ import {
 import { Request } from "express";
 import { JwtService } from "@nestjs/jwt";
 import { REQUEST_TOKEN_PAYLOAD } from "../auth.constants";
+import { UsersService } from "src/users/users.service";
 
 @Injectable()
 export class AuthTokenGuard implements CanActivate {
-  constructor(private readonly jwtService: JwtService) {}
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly usersService: UsersService
+  ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const req: Request = context.switchToHttp().getRequest();
@@ -24,7 +28,16 @@ export class AuthTokenGuard implements CanActivate {
         issuer: process.env.JWT_TOKEN_ISSUER,
       });
 
-      req[REQUEST_TOKEN_PAYLOAD] = payload;
+      const user = await this.usersService.findOne(payload.id);
+      if (!user) {
+        throw new UnauthorizedException("Usuário não existe mais");
+      }
+
+      req[REQUEST_TOKEN_PAYLOAD] = {
+        ...payload,
+        role: user.role,
+        id: user.id,
+      };
     } catch (error) {
       throw new UnauthorizedException("Token inválido ou expirado");
     }
