@@ -1,5 +1,7 @@
 import { User } from "src/users/entities/user.model";
 import { Event } from "src/events/entities/event.model";
-export const models = [User, Event];
+import { Registration } from "src/registrations/entities/registration.model";
 
-export { User, Event };
+export const models = [User, Event, Registration];
+
+export { User, Event, Registration };

@@ -5,9 +5,16 @@ import { AuthModule } from "src/auth/auth.module";
 import { DatabaseModule } from "src/config/database.module";
 import { UsersModule } from "src/users/users.module";
 import { EventsModule } from "src/events/events.module";
+import { RegistrationsModule } from "src/registrations/registrations.module";
 
 @Module({
-  imports: [DatabaseModule, AuthModule, UsersModule, EventsModule],
+  imports: [
+    DatabaseModule,
+    AuthModule,
+    UsersModule,
+    EventsModule,
+    RegistrationsModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
