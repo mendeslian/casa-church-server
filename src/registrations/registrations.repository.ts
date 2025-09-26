@@ -11,7 +11,7 @@ export class RegistrationsRepotisory {
     private readonly registrationModel: typeof Registration
   ) {}
 
-  async create(data: CreateRegistration) {
+  async create(data) {
     const createdRegistration = await this.registrationModel.create(data);
 
     return createdRegistration;
