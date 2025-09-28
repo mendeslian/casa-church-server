@@ -7,6 +7,7 @@ import { UsersModule } from "src/users/users.module";
 import { EventsModule } from "src/events/events.module";
 import { RegistrationsModule } from "src/registrations/registrations.module";
 import { PostsModule } from "src/posts/posts.module";
+import { SermonsModule } from "src/sermons/sermons.module";
 
 @Module({
   imports: [
@@ -16,8 +17,9 @@ import { PostsModule } from "src/posts/posts.module";
     EventsModule,
     RegistrationsModule,
     PostsModule,
+    SermonsModule
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule {}
+export class AppModule { }
