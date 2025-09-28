@@ -38,7 +38,7 @@ export class UsersRepository {
     return {
       total: count,
       page,
-      pageCount: Math.ceil(count / limit),
+      totalPages: Math.ceil(count / limit),
       users: rows,
     };
   }
