@@ -22,9 +22,7 @@ export class UsersRepository {
     const offset = (page - 1) * limit;
 
     const where: any = {};
-    if (name) {
-      where.name = { [Op.iLike]: `${name}%` };
-    }
+    if (name) where.name = { [Op.iLike]: `${name}%` };
 
     const { rows, count } = await this.userModel.findAndCountAll({
       where,
