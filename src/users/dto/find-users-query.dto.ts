@@ -1,7 +1,7 @@
 import { IsInt, IsOptional, IsString, IsIn, Min } from "class-validator";
 import { Type } from "class-transformer";
 
-export class FindUsersDto {
+export class FindUsersQueryDto {
   @IsOptional()
   @Type(() => Number)
   @IsInt({ message: "O parâmetro página deve ser um inteiro" })
@@ -26,5 +26,5 @@ export class FindUsersDto {
   @IsIn(["ASC", "DESC"], {
     message: "O parâmetro direção deve ser ASC ou DESC",
   })
-  orderDirection: "ASC" | "DESC" = "ASC";
+  orderDirection: "ASC" | "DESC" = "DESC";
 }
