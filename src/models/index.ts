@@ -3,7 +3,8 @@ import { Event } from "src/events/entities/event.model";
 import { Registration } from "src/registrations/entities/registration.model";
 import { Post } from "src/posts/entities/post.model";
 import { Sermon } from "src/sermons/entities/sermon.model"
+import { Lesson } from "src/lessons/entities/lesson.model";
 
-export const models = [User, Event, Registration, Post, Sermon];
+export const models = [User, Event, Registration, Post, Sermon, Lesson];
 
-export { User, Event, Registration, Post, Sermon };
+export { User, Event, Registration, Post, Sermon, Lesson };
