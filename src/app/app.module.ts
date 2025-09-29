@@ -18,8 +18,6 @@ import { LessonsModule } from "src/lessons/lessons.module";
     EventsModule,
     RegistrationsModule,
     PostsModule,
-    SermonsModule,
-    LessonsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
