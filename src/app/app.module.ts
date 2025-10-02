@@ -9,6 +9,7 @@ import { RegistrationsModule } from "src/registrations/registrations.module";
 import { PostsModule } from "src/posts/posts.module";
 import { SermonsModule } from "src/sermons/sermons.module";
 import { ContactMessagesModule } from "src/contact-messages/contact-messages.module";
+import { DonationsModule } from "src/donations/donations.module";
 
 @Module({
   imports: [
@@ -20,6 +21,7 @@ import { ContactMessagesModule } from "src/contact-messages/contact-messages.mod
     PostsModule,
     SermonsModule,
     ContactMessagesModule,
+    DonationsModule,
   ],
   controllers: [AppController],
   providers: [AppService],

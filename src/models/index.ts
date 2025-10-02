@@ -4,7 +4,8 @@ import { Registration } from "src/registrations/entities/registration.model";
 import { Post } from "src/posts/entities/post.model";
 import { Sermon } from "src/sermons/entities/sermon.model"
 import { ContactMessage } from "src/contact-messages/entities/contact-message.model";
+import { Donation } from "src/donations/entities/donation.model";
 
-export const models = [User, Event, Registration, Post, Sermon, ContactMessage];
+export const models = [User, Event, Registration, Post, Sermon, ContactMessage, Donation];
 
-export { User, Event, Registration, Post, Sermon, ContactMessage };
+export { User, Event, Registration, Post, Sermon, ContactMessage, Donation };
