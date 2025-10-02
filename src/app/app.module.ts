@@ -18,7 +18,7 @@ import { ContactMessagesModule } from "src/contact-messages/contact-messages.mod
     EventsModule,
     RegistrationsModule,
     PostsModule,
-    SermonsModule
+    SermonsModule,
     ContactMessagesModule,
   ],
   controllers: [AppController],
