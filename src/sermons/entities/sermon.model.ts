@@ -18,7 +18,7 @@ export class Sermon extends Model<Sermon> {
   @Column(DataType.UUID)
   declare id: string;
 
-  @Column({ type: DataType.STRING(100), allowNull: false })
+  @Column({ type: DataType.STRING(100) })
   declare title: string;
 
   @Column({ type: DataType.STRING(255) })

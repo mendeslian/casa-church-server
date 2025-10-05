@@ -6,6 +6,7 @@ import { EventsModule } from "src/events/events.module";
 import { RegistrationsModule } from "src/registrations/registrations.module";
 import { PostsModule } from "src/posts/posts.module";
 import { SermonsModule } from "src/sermons/sermons.module";
+import { LessonsModule } from "src/lessons/lessons.module";
 import { ContactMessagesModule } from "src/contact-messages/contact-messages.module";
 
 @Module({
@@ -16,6 +17,7 @@ import { ContactMessagesModule } from "src/contact-messages/contact-messages.mod
     EventsModule,
     RegistrationsModule,
     PostsModule,
+    LessonsModule,
     SermonsModule,
     ContactMessagesModule,
   ],
