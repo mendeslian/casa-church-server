@@ -9,7 +9,7 @@ import {
 import { Type } from "class-transformer";
 
 export class FindLessonQueryDto {
-  @IsUUID("4", { message: "O parâmetro sermão deve ser um texto" })
+  @IsUUID("4", { message: "O parâmetro sermão é inválido." })
   sermonId: string;
 
   @IsOptional()
