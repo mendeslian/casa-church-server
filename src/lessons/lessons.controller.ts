@@ -16,12 +16,15 @@ import { UseGuards } from "@nestjs/common";
 import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
 import { FindLessonQueryDto } from "./dto/find-lesson-query.dto";
+import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
 
+@ApiSecurity("auth-token")
 @UseGuards(AuthTokenGuard)
 @Controller("lessons")
 export class LessonsController {
   constructor(private readonly lessonsService: LessonsService) {}
 
+  @ApiOperation({ summary: "Cadastrar novas aulas" })
   @Post()
   create(
     @Body() createLessonDto: CreateLessonDto,
@@ -30,18 +33,19 @@ export class LessonsController {
     return this.lessonsService.create(createLessonDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Listar todas as aulas" })
   @Get()
-  findAll(
-    @Query() findLessonQueryDto: FindLessonQueryDto
-  ) {
+  findAll(@Query() findLessonQueryDto: FindLessonQueryDto) {
     return this.lessonsService.findAll(findLessonQueryDto);
   }
 
+  @ApiOperation({ summary: "Listar detalhes de uma aula específica" })
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.lessonsService.findOne(id);
   }
 
+  @ApiOperation({ summary: "Atualizar uma aula específica" })
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -51,6 +55,7 @@ export class LessonsController {
     return this.lessonsService.update(id, updateLessonDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Excluir uma aula específica" })
   @Delete(":id")
   remove(
     @Param("id") id: string,

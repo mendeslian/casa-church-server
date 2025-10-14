@@ -14,12 +14,15 @@ import { AuthTokenGuard } from "src/auth/guard/auth-token.guard";
 import { UseGuards } from "@nestjs/common";
 import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
+import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
 
+@ApiSecurity("auth-token")
 @UseGuards(AuthTokenGuard)
 @Controller("sermons")
 export class SermonsController {
   constructor(private readonly sermonsService: SermonsService) {}
 
+  @ApiOperation({ summary: "Criar novos sermões" })
   @Post()
   create(
     @Body() createSermonDto: CreateSermonDto,
@@ -28,16 +31,19 @@ export class SermonsController {
     return this.sermonsService.create(createSermonDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Listar todos os sermões" })
   @Get()
   findAll() {
     return this.sermonsService.findAll();
   }
 
+  @ApiOperation({ summary: "Listar detalhes de um sermão específico" })
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.sermonsService.findOne(id);
   }
 
+  @ApiOperation({ summary: "Atualizar um sermão específico" })
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -47,6 +53,7 @@ export class SermonsController {
     return this.sermonsService.update(id, updateSermonDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Excluir um sermão específico" })
   @Delete(":id")
   remove(
     @Param("id") id: string,

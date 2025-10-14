@@ -1,37 +1,64 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, UseGuards } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  UseGuards,
+} from "@nestjs/common";
 
-import { ContactMessagesService } from './contact-messages.service';
-import { CreateContactMessageDto } from './dto/create-contact-message.dto';
-import { UpdateContactMessageDto } from './dto/update-contact-message.dto';
+import { ContactMessagesService } from "./contact-messages.service";
+import { CreateContactMessageDto } from "./dto/create-contact-message.dto";
+import { UpdateContactMessageDto } from "./dto/update-contact-message.dto";
 import { AuthTokenGuard } from "src/auth/guard/auth-token.guard";
+import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
 
+@ApiSecurity("auth-token")
 @UseGuards(AuthTokenGuard)
-@Controller('contact-messages')
+@Controller("contact-messages")
 export class ContactMessagesController {
-  constructor(private readonly contactMessagesService: ContactMessagesService) {}
+  constructor(
+    private readonly contactMessagesService: ContactMessagesService
+  ) {}
 
+  @ApiOperation({ summary: "Criar novas mensagens no fórum de discussão" })
   @Post()
   create(@Body() createContactMessageDto: CreateContactMessageDto) {
     return this.contactMessagesService.create(createContactMessageDto);
   }
 
+  @ApiOperation({ summary: "Listar todas as mensagens do fórum de discussão" })
   @Get()
   findAll() {
     return this.contactMessagesService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
+  @ApiOperation({
+    summary: "Listar detalhes de uma mensagem do fórum de discussão",
+  })
+  @Get(":id")
+  findOne(@Param("id") id: string) {
     return this.contactMessagesService.findOne(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateContactMessageDto: UpdateContactMessageDto) {
+  @ApiOperation({
+    summary: "Atualizar uma mensagem específica do fórum de discussão",
+  })
+  @Patch(":id")
+  update(
+    @Param("id") id: string,
+    @Body() updateContactMessageDto: UpdateContactMessageDto
+  ) {
     return this.contactMessagesService.update(id, updateContactMessageDto);
   }
 
-  @Delete(':id')
-  remove(@Param('id') id: string) {
+  @ApiOperation({
+    summary: "Excluir uma mensagem específica do fórum de discussão",
+  })
+  @Delete(":id")
+  remove(@Param("id") id: string) {
     return this.contactMessagesService.remove(id);
   }
 }
