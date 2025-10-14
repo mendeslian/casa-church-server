@@ -64,7 +64,7 @@ export class RegistrationsRepotisory {
     });
   }
 
-  async update(id: string, data: UpdateRegistration) {
+  async update(id: string, data) {
     const registration = await this.findById(id);
 
     return await registration!.update(data);
