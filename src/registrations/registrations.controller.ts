@@ -16,12 +16,15 @@ import { UseGuards } from "@nestjs/common";
 import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
 import { FindRegistrationsQueryDto } from "./dto/find-registrations-query.dto";
+import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
 
+@ApiSecurity("auth-token")
 @UseGuards(AuthTokenGuard)
 @Controller("registrations")
 export class RegistrationsController {
   constructor(private readonly registrationsService: RegistrationsService) {}
 
+  @ApiOperation({ summary: "Criar novas inscrições" })
   @Post()
   create(
     @Body() createRegistrationDto: CreateRegistrationDto,
@@ -33,6 +36,10 @@ export class RegistrationsController {
     );
   }
 
+  @ApiOperation({
+    summary:
+      "Listar todas as inscrições (obs: admins podem listar de todos os usuários)",
+  })
   @Get()
   findAll(
     @TokenPayloadParam() tokenPayload: TokenPayloadDto,
@@ -44,6 +51,9 @@ export class RegistrationsController {
     );
   }
 
+  @ApiOperation({
+    summary: "Listar detalhes de uma inscrição específica",
+  })
   @Get(":id")
   findOne(
     @Param("id") id: string,
@@ -52,6 +62,7 @@ export class RegistrationsController {
     return this.registrationsService.findOne(id, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Atualizar uma inscrição (ex: status) específica" })
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -65,6 +76,7 @@ export class RegistrationsController {
     );
   }
 
+  @ApiOperation({ summary: "Excluír(cancelar) uma inscrição específica" })
   @Delete(":id")
   remove(
     @Param("id") id: string,

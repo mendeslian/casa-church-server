@@ -16,11 +16,15 @@ import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
 import { FindPostsQueryDto } from "./dto/find-posts-query.dto";
 
+import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
+
+@ApiSecurity("auth-token")
 @UseGuards(AuthTokenGuard)
 @Controller("posts")
 export class PostsController {
   constructor(private readonly postsService: PostsService) {}
 
+  @ApiOperation({ summary: "Criar novas postagens" })
   @Post()
   create(
     @Body() createPostDto: CreatePostDto,
@@ -29,16 +33,19 @@ export class PostsController {
     return this.postsService.create(createPostDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Listar todas as postagens" })
   @Get()
   findAll(@Query() findPostsQuery: FindPostsQueryDto) {
     return this.postsService.findAll(findPostsQuery);
   }
 
+  @ApiOperation({ summary: "Listar detalhes de uma postagem específica" })
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.postsService.findOne(id);
   }
 
+  @ApiOperation({ summary: "Excluír uma postagem específica" })
   @Delete(":id")
   remove(
     @Param("id") id: string,

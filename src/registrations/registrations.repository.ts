@@ -19,7 +19,6 @@ export class RegistrationsRepotisory {
   }
 
   async findAll(findRegistrationsQuery: FindRegistrationsQueryDto) {
-    console.log(findRegistrationsQuery);
     const { page, limit, userId, eventId, orderBy, orderDirection } =
       findRegistrationsQuery;
     const offset = (page - 1) * limit;
@@ -65,7 +64,7 @@ export class RegistrationsRepotisory {
     });
   }
 
-  async update(id: string, data: UpdateRegistration) {
+  async update(id: string, data) {
     const registration = await this.findById(id);
 
     return await registration!.update(data);

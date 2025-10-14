@@ -16,12 +16,15 @@ import { AuthTokenGuard } from "src/auth/guard/auth-token.guard";
 import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
 import { FindEventsQueryDto } from "./dto/find-events-query.dto";
+import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
 
+@ApiSecurity("auth-token")
 @UseGuards(AuthTokenGuard)
 @Controller("events")
 export class EventsController {
   constructor(private readonly eventsService: EventsService) {}
 
+  @ApiOperation({ summary: "Cadastrar novos eventos" })
   @Post()
   create(
     @Body() createEventDto: CreateEventDto,
@@ -30,16 +33,19 @@ export class EventsController {
     return this.eventsService.create(createEventDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Listar todos os eventos" })
   @Get()
   findAll(@Query() findEventsQuery: FindEventsQueryDto) {
     return this.eventsService.findAll(findEventsQuery);
   }
 
+  @ApiOperation({ summary: "Listar detalhes de um evento especifico" })
   @Get(":id")
   findOne(@Param("id") id: string) {
     return this.eventsService.findOne(id);
   }
 
+  @ApiOperation({ summary: "Atualizar um eventos especifico" })
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -49,6 +55,7 @@ export class EventsController {
     return this.eventsService.update(id, updateEventDto, tokenPayload);
   }
 
+  @ApiOperation({ summary: "Excluir um evento especifico" })
   @Delete(":id")
   remove(
     @Param("id") id: string,
