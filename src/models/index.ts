@@ -6,6 +6,7 @@ import { Sermon } from "src/sermons/entities/sermon.model";
 import { Lesson } from "src/lessons/entities/lesson.model";
 import { ContactMessage } from "src/contact-messages/entities/contact-message.model";
 import { Donation } from "src/donations/entities/donation.model";
+import { Comment } from "src/comments/entities/comment.model";
 
 export const models = [
   User,
@@ -15,8 +16,8 @@ export const models = [
   Sermon,
   Lesson,
   ContactMessage,
-  ,
   Donation,
+  Comment
 ];
 
-export { User, Event, Registration, Post, Sermon, ContactMessage };
+export { User, Event, Registration, Post, Sermon, ContactMessage, Donation,  Comment};
