@@ -1,6 +1,7 @@
 import { Module } from "@nestjs/common";
 import { AuthModule } from "src/auth/auth.module";
 import { DatabaseModule } from "src/config/database.module";
+import { DataCacheModule } from "src/config/data-cache.module";
 import { UsersModule } from "src/users/users.module";
 import { EventsModule } from "src/events/events.module";
 import { RegistrationsModule } from "src/registrations/registrations.module";
@@ -14,6 +15,7 @@ import { LikesModule } from "src/likes/likes.module";
 @Module({
   imports: [
     DatabaseModule,
+    DataCacheModule,
     AuthModule,
     UsersModule,
     EventsModule,
