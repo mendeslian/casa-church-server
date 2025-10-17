@@ -8,6 +8,7 @@ import {
   Delete,
   UseGuards,
   Query,
+  UseInterceptors,
 } from "@nestjs/common";
 import { LessonProgressService } from "./lesson-progress.service";
 import { CreateLessonProgressDto } from "./dto/create-lesson-progress.dto";
@@ -17,6 +18,7 @@ import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
 import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { FindLessonProgressDto } from "./dto/find-lesson-progress-query.dto";
 import { ApiOperation } from "@nestjs/swagger";
+import { CacheInterceptor } from "@nestjs/cache-manager";
 
 @UseGuards(AuthTokenGuard)
 @Controller("lesson-progress")
@@ -37,6 +39,7 @@ export class LessonProgressController {
 
   @ApiOperation({ summary: "Listar os progressos de aula." })
   @Get()
+  @UseInterceptors(CacheInterceptor)
   findAll(
     @TokenPayloadParam() tokenPayLoad: TokenPayloadDto,
     @Query() findLessonProgressDto: FindLessonProgressDto

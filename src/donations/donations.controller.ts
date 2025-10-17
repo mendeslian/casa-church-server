@@ -31,6 +31,7 @@ export class DonationsController {
 
   @ApiOperation({ summary: "Visualizar detalhes de uma doação" })
   @Get(':id')
+  @UseInterceptors(CacheInterceptor)
   findOne(@Param('id') id: string, @TokenPayloadParam() tokenPayload: TokenPayloadDto) {
     return this.donationsService.findOne(id, tokenPayload);
   }

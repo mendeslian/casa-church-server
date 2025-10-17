@@ -37,6 +37,7 @@ export class LessonsController {
 
   @ApiOperation({ summary: "Listar todas as aulas" })
   @Get()
+  @UseInterceptors(CacheInterceptor)
   findAll(
     @Query() findLessonQueryDto: FindLessonQueryDto
   ) {
