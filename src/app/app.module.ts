@@ -10,6 +10,9 @@ import { SermonsModule } from "src/sermons/sermons.module";
 import { LessonsModule } from "src/lessons/lessons.module";
 import { ContactMessagesModule } from "src/contact-messages/contact-messages.module";
 import { DonationsModule } from "src/donations/donations.module";
+import { CommentsModule } from "src/comments/comments.module";
+import { LikesModule } from "src/likes/likes.module";
+import { LocationsModule } from "src/locations/locations.module";
 import { LessonProgressModule } from "src/lesson-progress/lesson-progress.module";
 
 @Module({
@@ -26,6 +29,9 @@ import { LessonProgressModule } from "src/lesson-progress/lesson-progress.module
     SermonsModule,
     ContactMessagesModule,
     DonationsModule,
+    CommentsModule,
+    LikesModule,
+    LocationsModule
   ],
 })
 export class AppModule {}

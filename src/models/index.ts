@@ -6,6 +6,9 @@ import { Sermon } from "src/sermons/entities/sermon.model";
 import { Lesson } from "src/lessons/entities/lesson.model";
 import { ContactMessage } from "src/contact-messages/entities/contact-message.model";
 import { Donation } from "src/donations/entities/donation.model";
+import { Comment } from "src/comments/entities/comment.model";
+import { Like } from "src/likes/entities/like.model";
+import { Location } from "src/locations/entities/location.entity";
 import { LessonProgress } from "src/lesson-progress/entities/lesson-progress.model";
 
 export const models = [
@@ -18,6 +21,9 @@ export const models = [
   ContactMessage,
   Donation,
   LessonProgress,
+  Like,
+  Comment, 
+  Location
 ];
 
 export {
@@ -28,6 +34,6 @@ export {
   Sermon,
   Lesson,
   ContactMessage,
-  Donation,
+  Donation, Like, Comment, Location,
   LessonProgress,
 };
