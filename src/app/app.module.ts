@@ -10,6 +10,7 @@ import { SermonsModule } from "src/sermons/sermons.module";
 import { LessonsModule } from "src/lessons/lessons.module";
 import { ContactMessagesModule } from "src/contact-messages/contact-messages.module";
 import { DonationsModule } from "src/donations/donations.module";
+import { LessonProgressModule } from "src/lesson-progress/lesson-progress.module";
 
 @Module({
   imports: [
@@ -21,6 +22,7 @@ import { DonationsModule } from "src/donations/donations.module";
     RegistrationsModule,
     PostsModule,
     LessonsModule,
+    LessonProgressModule,
     SermonsModule,
     ContactMessagesModule,
     DonationsModule,
