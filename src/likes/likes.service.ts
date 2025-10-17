@@ -5,7 +5,7 @@ import { FORBIDDEN_OPERATION_MESSAGE } from "src/common/constants/messages.const
 import { CreateLikeDto } from './dto/create-like.dto';
 import { LikesRepository } from './likes.repository';
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
-import { USER_ADMIN_ROLE } from "src/users/user.constants";
+import { FindLikesQueryDto } from './dto/find-likes-query.dto';
 
 @Injectable()
 export class LikesService {
@@ -26,26 +26,13 @@ constructor(private readonly likesRepository: LikesRepository) {}
     };
   }
 
-  async findAll() {
-    return await this.likesRepository.findAll();
+  async findAll(findLikesQuery: FindLikesQueryDto) {
+    return await this.likesRepository.findAll(findLikesQuery);
   }
 
-  async findAllByUserId(userId: string, tokenPayload: TokenPayloadDto) {
-    const like = await this.likesRepository.findByUserId(userId);
-    if (!like) throw new NotFoundException(NOT_FOUND_LIKE);
-    
-    if (userId !== tokenPayload.id) 
-      throw new ForbiddenException(FORBIDDEN_OPERATION_MESSAGE);
-    
-    return like;
-  }
-
-  async findOne(id: string, tokenPayload: TokenPayloadDto) {
+  async findOne(id: string) {
     const like = await this.likesRepository.findById(id);
     if (!like) throw new NotFoundException(NOT_FOUND_LIKE);
-
-    if (like.userId !== tokenPayload.id) 
-      throw new ForbiddenException(FORBIDDEN_OPERATION_MESSAGE);
 
     return like;
   }

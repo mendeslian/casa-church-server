@@ -1,9 +1,10 @@
-import { Controller, Get, Post, Body, Param, Delete, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete, UseGuards, Query } from '@nestjs/common';
 import { LikesService } from './likes.service';
 import { CreateLikeDto } from './dto/create-like.dto';
 import { AuthTokenGuard } from "src/auth/guard/auth-token.guard";
 import { TokenPayloadParam } from "src/auth/params/token-payload.param";
 import { TokenPayloadDto } from "src/auth/dto/token-payload.dto";
+import { FindLikesQueryDto } from "src/likes/dto/find-likes-query.dto";
 
 import { ApiOperation, ApiSecurity } from "@nestjs/swagger";
 
@@ -21,20 +22,14 @@ export class LikesController {
 
   @ApiOperation({ summary: "Listar todas curtida" })
   @Get()
-  findAll() {
-    return this.likesService.findAll();
-  }
-
-  @ApiOperation({ summary: "Listar curtidas por usuário" })
-  @Get('user/:userId')
-  findAllByUserId(@Param('userId') userId: string, @TokenPayloadParam() tokenPayload: TokenPayloadDto) {
-    return this.likesService.findAllByUserId(userId, tokenPayload);
+  findAll(@Query() findLikesQuery: FindLikesQueryDto) {
+    return this.likesService.findAll(findLikesQuery);
   }
 
   @ApiOperation({ summary: "Visualizar detalhes de uma curtida" })
   @Get(':id')
-  findOne(@Param('id') id: string, @TokenPayloadParam() tokenPayload: TokenPayloadDto) {
-    return this.likesService.findOne(id, tokenPayload);
+  findOne(@Param('id') id: string) {
+    return this.likesService.findOne(id);
   }
 
   @ApiOperation({ summary: "Deletar uma curtida" })

@@ -1,6 +1,7 @@
 import { InjectModel } from "@nestjs/sequelize";
 import { Like } from "src/models";
 import { CreateLike } from "./types/like.types";
+import { FindLikesQueryDto } from './dto/find-likes-query.dto';
 
 export class LikesRepository {
     constructor(
@@ -14,18 +15,32 @@ export class LikesRepository {
         return createdLike;
     }
 
-    async findAll() {
-        return await this.likeModel.findAll();
+    async findAll(findLikesQuery: FindLikesQueryDto) {
+        const { page, limit, userId, orderBy, orderDirection } = findLikesQuery;
+        const offset = (page - 1) * limit;
+
+        const where: any = {};
+        if (userId) where.userId = userId;
+        
+        const { rows, count } = await this.likeModel.findAndCountAll({
+        where,
+        limit,
+        offset,
+        order: [[orderBy, orderDirection]],
+        });
+
+        return {
+        total: count,
+        page,
+        totalPages: Math.ceil(count / limit),
+        likes: rows,
+        };
     }
 
     async findById(id: string) {
         const like = await this.likeModel.findByPk(id);
 
         return like;
-    }
-
-    async findByUserId(userId: string) {
-        return await this.likeModel.findAll({ where: { userId } });
     }
     
     async delete(id: string) {
