@@ -1,4 +1,4 @@
-export type CreateLocation = {
+export type CreateEventFeedback = {
   name: string;
   street: string;
   number: string;
@@ -9,7 +9,7 @@ export type CreateLocation = {
   capacity?: number;
 };
 
-export type UpdateLocation = {
+export type UpdateEventFeedback = {
   name?: string;
   street?: string;
   number?: string;
