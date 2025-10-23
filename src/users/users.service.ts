@@ -14,6 +14,7 @@ import {
   CREATED_USER_MESSAGE,
   DELETED_USER_MESSAGE,
   NOT_FOUND_USER_MESSAGE,
+  UPDATE_USER_CONFLICT_MESSAGE,
   UPDATED_USER_MESSAGE,
   USER_ADMIN_ROLE,
 } from "./user.constants";
@@ -71,6 +72,14 @@ export class UsersService {
 
     const userExists = await this.usersRepository.findById(id);
     if (!userExists) throw new NotFoundException(NOT_FOUND_USER_MESSAGE);
+
+    if (updateUserDto.email) {
+      const emailExists = await this.usersRepository.findByEmail(
+        updateUserDto.email
+      );
+      if (emailExists)
+        throw new ConflictException(UPDATE_USER_CONFLICT_MESSAGE);
+    }
 
     if (updateUserDto.password) {
       const passwordHash = await this.hashService.hash(updateUserDto.password);
