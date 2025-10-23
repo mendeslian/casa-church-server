@@ -29,7 +29,7 @@ export class Registration extends Model<Registration> {
 
   @Default(RegistrationStatus.PENDING)
   @Column(DataType.ENUM(...Object.values(RegistrationStatus)))
-  declare role: RegistrationStatus;
+  declare status: RegistrationStatus;
 
   @CreatedAt
   declare createdAt: Date;
