@@ -1,5 +1,11 @@
 import { Type } from "class-transformer";
-import { IsString, IsNotEmpty, IsDate, MaxLength } from "class-validator";
+import {
+  IsString,
+  IsNotEmpty,
+  IsDate,
+  MaxLength,
+  IsUUID,
+} from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateEventDto {
@@ -49,4 +55,12 @@ export class CreateEventDto {
   @IsDate({ message: 'O campo data de término deve ser do tipo "data"' })
   @Type(() => Date)
   endDate: Date;
+
+  @ApiProperty({
+    example: "d0f4e6d1-4a23-4c7a-9c9b-8b01f4c0e5e9",
+    description: "ID do local onde o evento será realizado",
+  })
+  @IsNotEmpty({ message: "O campo local do evento não pode ser vazio." })
+  @IsUUID("4", { message: "O campo local do evento deve ser um UUID válido." })
+  locationId: string;
 }
