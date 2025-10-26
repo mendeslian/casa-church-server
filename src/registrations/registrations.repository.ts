@@ -1,15 +1,17 @@
 import { InjectModel } from "@nestjs/sequelize";
-import { Registration } from "src/models";
-import {
-  CreateRegistration,
-  UpdateRegistration,
-} from "./types/registration.types";
+import { Registration, Event, Location } from "src/models";
 import { FindRegistrationsQueryDto } from "./dto/find-registrations-query.dto";
 
 export class RegistrationsRepotisory {
   constructor(
     @InjectModel(Registration)
-    private readonly registrationModel: typeof Registration
+    private readonly registrationModel: typeof Registration,
+
+    @InjectModel(Event)
+    private readonly eventModel: typeof Event,
+
+    @InjectModel(Location)
+    private readonly locationModel: typeof Location
   ) {}
 
   async create(data) {
@@ -75,5 +77,20 @@ export class RegistrationsRepotisory {
     await registration!.destroy();
 
     return;
+  }
+
+  async findEventWithLocation(eventId: string) {
+    return this.eventModel.findByPk(eventId, {
+      include: [{ model: this.locationModel }],
+    });
+  }
+
+  async countActiveByEvent(eventId: string) {
+    return this.registrationModel.count({
+      where: {
+        eventId,
+        status: "confirmed",
+      },
+    });
   }
 }
