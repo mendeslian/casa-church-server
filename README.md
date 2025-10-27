@@ -5,6 +5,7 @@ Um sistema web completo para gerenciamento da igreja, oferecendo funcionalidades
 ## 🛠 Funcionalidades
 
 O sistema contempla diversas funcionalidades, incluindo:
+
 - Eventos: Criação e gerenciamento de eventos da igreja (events, event_feedbacks, registrations).
 - Sermões: Gerenciamento de sermões (sermons) para membros acompanharem conteúdos espirituais.
 - Conteúdos de Aprendizado: Lições e progresso dos membros em estudos (lessons, lesson_progress).
@@ -16,12 +17,14 @@ O sistema contempla diversas funcionalidades, incluindo:
 ## 📥 Como Rodar o Projeto
 
 #### 1. Clone o repositório:
+
 ```
 $ git clone https://github.com/mendeslian/casa-church-server.git
 $ cd casa-church-server
 ```
 
 #### 2. Instale as dependências:
+
 ```
 $ npm install
 ```
@@ -29,15 +32,21 @@ $ npm install
 #### 3. Configure seu arquivo `.env` com as credenciais do banco de dados.
 
 #### 4. Execute o projeto:
+
 - Modo desenvolvimento:
+
 ```
 $ npm run start
 ```
+
 - Modo desenvolvimento com watch:
+
 ```
 $ npm run start:dev
 ```
+
 - Modo produção:
+
 ```
 $ npm run start:prod
 ```
@@ -51,6 +60,7 @@ $ npm run start:prod
 - Validação e Documentação: class-validator, class-transformer, Swagger
 
 ## 📚 Detalhes do Sistema
+
 - Permissões de roles (admin/user)
 - Fluxo de autenticação JWT
 - Exemplos práticos de uso da API

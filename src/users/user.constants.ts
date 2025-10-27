@@ -10,3 +10,5 @@ export const DELETED_USER_MESSAGE = "Usuário removido com sucesso.";
 export const NOT_FOUND_USER_MESSAGE = "Usuário não encontrado.";
 export const CREATE_USER_CONFLICT_MESSAGE =
   "Não foi possível concluir o cadastro, pois o e-mail informado já está associado a outra conta.";
+export const UPDATE_USER_CONFLICT_MESSAGE =
+  "Não foi possível atualizar o usuário, pois o e-mail informado já está associado a outra conta.";
