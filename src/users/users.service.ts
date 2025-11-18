@@ -17,6 +17,7 @@ import {
   UPDATE_USER_CONFLICT_MESSAGE,
   UPDATED_USER_MESSAGE,
   USER_ADMIN_ROLE,
+  USER_ROLE,
 } from "./user.constants";
 import { FORBIDDEN_OPERATION_MESSAGE } from "src/common/constants/messages.constants";
 import { FindUsersQueryDto } from "./dto/find-users-query.dto";
@@ -28,11 +29,7 @@ export class UsersService {
     private readonly hashService: HashService
   ) {}
 
-  async create(createUserDto: CreateUserDto, tokenPayload: TokenPayloadDto) {
-    if (tokenPayload.role !== USER_ADMIN_ROLE) {
-      throw new ForbiddenException(FORBIDDEN_OPERATION_MESSAGE);
-    }
-
+  async create(createUserDto: CreateUserDto) {
     const userExists = await this.usersRepository.findByEmail(
       createUserDto.email
     );
@@ -42,9 +39,10 @@ export class UsersService {
     const userData = {
       ...createUserDto,
       password: hashPassword,
+      role: USER_ROLE,
     };
 
-    const user = await this.usersRepository.create(userData);
+    const user = await this.usersRepository.create(userData as any);
     return {
       message: CREATED_USER_MESSAGE,
       user,
