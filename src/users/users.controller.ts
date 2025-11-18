@@ -21,8 +21,6 @@ import { ApiSecurity, ApiOperation } from "@nestjs/swagger";
 import { CacheInterceptor } from "@nestjs/cache-manager";
 import { UserActivityInterceptor } from "src/common/interceptors/user-activity.interceptor";
 
-@ApiSecurity("auth-token")
-@UseGuards(AuthTokenGuard)
 @UseInterceptors(UserActivityInterceptor)
 @Controller("users")
 export class UsersController {
@@ -32,12 +30,13 @@ export class UsersController {
   @Post()
   create(
     @Body() createUserDto: CreateUserDto,
-    @TokenPayloadParam() tokenPayload: TokenPayloadDto
   ) {
-    return this.usersService.create(createUserDto, tokenPayload);
+    return this.usersService.create(createUserDto);
   }
 
   @ApiOperation({ summary: "Listar todos os usuários" })
+  @ApiSecurity("auth-token")
+  @UseGuards(AuthTokenGuard)
   @Get()
   @UseInterceptors(CacheInterceptor)
   findAll(@Query() findUsersQuery: FindUsersQueryDto) {
@@ -45,6 +44,8 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: "Listar detalhes de um usuário específico" })
+  @ApiSecurity("auth-token")
+  @UseGuards(AuthTokenGuard)
   @Get(":id")
   @UseInterceptors(CacheInterceptor)
   findOne(@Param("id") id: string) {
@@ -52,6 +53,8 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: "Atualizar um usuário específico" })
+  @ApiSecurity("auth-token")
+  @UseGuards(AuthTokenGuard)
   @Patch(":id")
   update(
     @Param("id") id: string,
@@ -62,6 +65,8 @@ export class UsersController {
   }
 
   @ApiOperation({ summary: "Excluir um usuário específico" })
+  @ApiSecurity("auth-token")
+  @UseGuards(AuthTokenGuard)
   @Delete(":id")
   remove(
     @Param("id") id: string,
